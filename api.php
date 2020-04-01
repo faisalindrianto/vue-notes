@@ -27,6 +27,7 @@
           function deleteNote($id){
                $deleteNotes = $this->db->prepare("DELETE FROM note WHERE id = :id");
                $deleteNotes->execute(['id' => $id]);
+               return json_encode(['status' => true, 'id' => $id, 'pesan' => 'data berhasil dihapus']);
           }
 
           function updateNote($id, $title, $description){
@@ -62,10 +63,10 @@
           echo $api->createNote($_POST['title'], $_POST['description']);
      }
      else if($f == "UPDATE"){
-          $api->updateNote($_POST['id'], $_POST['title'], $_POST['description']);
+          echo $api->updateNote($_POST['id'], $_POST['title'], $_POST['description']);
      }
      else if($f == "DELETE"){
-          $api->deleteNote($_POST['id']);
+          echo $api->deleteNote($_POST['id']);
      }
      else{
           if(isset($_GET['id'])){
